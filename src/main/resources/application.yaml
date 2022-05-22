@@ -1,0 +1,40 @@
+spring:
+  liquibase:
+    url: jdbc:postgresql://db:5432/postgres
+    user: compose-postgres
+    password: compose-postgres
+    change-log: db/changelog/changelog-master.yml
+  datasource:
+    url: jdbc:postgresql://db:5432/postgres
+    username: compose-postgres
+    password: compose-postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
+
+jwt:
+  token:
+    ttl: 300000
+    secret: secret
+
+
+db:
+  username: compose-postgres
+  password: compose-postgres
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
